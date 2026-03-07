@@ -136,7 +136,7 @@ if __name__ == "__main__":
                 )
 
     pool = Pool(args.parallelism)
-    num_flaps = len(args.text) if args.text is not None else 52
+    num_flaps = len(args.text) if args.text is not None else 40
     for _ in pool.imap_unordered(render_flap, range(num_flaps)):
         # Consume results as they occur so any exception is rethrown
         pass

@@ -28,8 +28,8 @@ For advanced makers: if you want to cut a single front panel that will be shared
 
 ## Elecrow (recommended)
 
-- Download the appropriate file:
-  - 52-flap design
+- Download the appropriate file (40-flap is the default in this repository):
+  - 52-flap design (optional)
     - 3mm acrylic
       - Download [zip](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-elecrow-3mm-acrylic_1x.zip)
       - Go to [Elecrow acrylic laser cutting](https://www.elecrow.com/acrylic-cutting.html) and upload the zip file
@@ -41,7 +41,7 @@ For advanced makers: if you want to cut a single front panel that will be shared
       - Download [zip](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-elecrow-3mm-wood_1x.zip)
       - Go to [Elecrow wood laser cutting](https://www.elecrow.com/5pcs-wood-laser-cutting-service.html)
       - Dimension: 20cm Max * 20cm Max(Thickness: 3mm)
-  - 40-flap design
+  - 40-flap design (default)
     - 3mm acrylic
       - Download [zip](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-elecrow-3mm-acrylic_1x.zip)
       - Go to [Elecrow acrylic laser cutting](https://www.elecrow.com/acrylic-cutting.html) and upload the zip file
@@ -58,11 +58,11 @@ For advanced makers: if you want to cut a single front panel that will be shared
 ![](https://paper-attachments.dropbox.com/s_175A71EF755D30C645040845CEAC36F09A2519808F9780643CBAC746263B696C_1592618387746_Screenshot+from+2020-06-19+18-59-27.png)
 
 ## Ponoko (also recommended, but pricey)
-- Download the appropriate file
-    - 52-flap design
+- Download the appropriate file (40-flap is the default in this repository)
+    - 52-flap design (optional)
         - 3mm Acrylic: [svg](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-ponoko-3mm-acrylic_1x.svg) <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-ponoko-3mm-acrylic_1x_dimensions.svg" />
         - 3mm MDF: [svg](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-ponoko-3mm-mdf_1x.svg) <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-ponoko-3mm-mdf_1x_dimensions.svg" />
-    - 40-flap design
+    - 40-flap design (default)
         - 3mm Acrylic: [svg](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-ponoko-3mm-acrylic_1x.svg) <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-ponoko-3mm-acrylic_1x_dimensions.svg" />
         - 3mm MDF: [svg](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-ponoko-3mm-mdf_1x.svg) <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-ponoko-3mm-mdf_1x_dimensions.svg" />
 

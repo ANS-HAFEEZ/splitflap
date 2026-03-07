@@ -134,7 +134,15 @@ void SerialLegacyJsonProtocol::init() {
     stream_.print("\n\n\n");
     stream_.print("{\"type\":\"init\", \"num_modules\":");
     stream_.print(NUM_MODULES);
-    stream_.print("}\n");
+    stream_.print(", \"character_list\":\"");
+    for (uint8_t i = 0; i < NUM_FLAPS; i++) {
+        // JSON-escape only what is needed for the current character sets.
+        if (flaps[i] == '"' || flaps[i] == '\\') {
+            stream_.write('\\');
+        }
+        stream_.write(flaps[i]);
+    }
+    stream_.print("\"}\n");
 }
 
 void SerialLegacyJsonProtocol::dumpStatus(const SplitflapState& state) {

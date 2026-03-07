@@ -14,18 +14,18 @@ If you have questions, please ask in the [community Discord server](https://disc
 
 **Material:** Acrylic
 
-The v2 design officially supports either 52 flaps per module or 40 flaps per module. The 52-flap design is the default recommendation here and is perfect if you will be buying the pre-printed "Epilogue" flap sets, but you can check out the advanced ordering instructions for details on the 40 flap variant.
+The v2 design officially supports either 40 flaps per module or 52 flaps per module. This guide defaults to the 40-flap variant for maximum compatibility, and the advanced ordering instructions cover the 52-flap variant as well.
 
 For reference, the front face of each module is approximately **82.6mm wide** and **143.53mm tall**.
 
-- [ ] Use this file to order a 52-flap design, made of 3mm acrylic (Matte Black (P502) is recommended): [zip](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-elecrow-3mm-acrylic_1x.zip)
+- [ ] Use this file to order a 40-flap design, made of 3mm acrylic (Matte Black (P502) is recommended): [zip](https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-elecrow-3mm-acrylic_1x.zip)
     - Go to [Elecrow acrylic laser cutting](https://www.elecrow.com/acrylic-cutting.html) and upload the zip file
-    - Enter dimensions: <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-52-elecrow-3mm-acrylic_1x_dimensions.svg" />
+    - Enter dimensions: <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/refs/tags/releases/mechanics/v2/3d/3d_laser_vector-40-elecrow-3mm-acrylic_1x_dimensions.svg" />
     - Select thickness: 3mm
     - Engrave: No
     - Acrylic color: Matte Black (P502) is recommended
 
-Full ordering instructions, and alternative files for acrylic/mdf or for 40- rather than 52-flap modules can be found [here](OrderingComplete.md).
+Full ordering instructions, and alternative files for acrylic/mdf or for 52- rather than 40-flap modules can be found [here](OrderingComplete.md).
 
 I’ve previously recommended ordering from Ponoko - and while I still believe they have great quality and customer service, they’ve gotten too expensive to be my default recommendation any longer 😞 
 
@@ -55,7 +55,7 @@ I’ve previously recommended ordering from Ponoko - and while I still believe t
 OR
 
 - [ ] You can buy blank flaps and [apply letter stickers to them yourself](https://www.youtube.com/watch?v=3lFECISLwyI)
-    - [ ] [blank flaps](https://bezeklabs.etsy.com/listing/979720975/blank-splitflap-display-flaps) (purchase the 1x52 or 6x52 packs for a 52-flap design. The 6x packs are available at a small discount)
+    - [ ] [blank flaps](https://bezeklabs.etsy.com/listing/979720975/blank-splitflap-display-flaps) (purchase enough for your module count: 240 for 6x40 modules, or 312 for 6x52 modules)
     - [ ] [vinyl letter stickers](https://amzn.to/37Frsjb) (from Amazon). Blank flaps are available in white or black, and vinyl letter stickers are [available](https://amzn.to/3ieAZj9) in [many](https://amzn.to/37t1y1R) different [colors](https://amzn.to/3tk4Ddh). (1 sticker pack for every **2** modules)
 
 

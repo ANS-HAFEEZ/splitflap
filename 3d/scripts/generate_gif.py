@@ -27,7 +27,7 @@ import openscad
 
 logging.basicConfig(level=logging.DEBUG)
 
-NUM_FLAPS = 52 # TODO: read from source?
+NUM_FLAPS = 40 # TODO: read from source?
 
 def generate_gif(output_folder, delay, filename):
     command = [

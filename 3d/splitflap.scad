@@ -79,7 +79,7 @@ spool_horizontal_explosion = lookup(spool_explosion, [
     [1, 8],
 ]);
 
-num_flaps = 52;
+num_flaps = 40;
 echo(num_flaps=num_flaps);
 
 // Ponoko kerf values are 0.2 mm for MDF and acrylic (all thicknesses)

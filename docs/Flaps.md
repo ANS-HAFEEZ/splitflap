@@ -5,7 +5,7 @@
 
 The flaps in this design are based around standard credit-card sized PVC cards (aka CR80). Each flap is 1/2 of a card, and has notches cut of the sides to create a "pin" that fits into the flap spool and allows it to flip freely.
 
-There are either 52 flaps (v2) or 40 flaps (v0) for every module, so for a small 6-character display that will be a total of 312 flaps (v2) or 240 flaps (v0) that need to be cut and have letters applied to them if you take the full DIY approach.
+Most builds use 40 flaps per module by default in this repository, but 52-flap v2 builds are also supported. For a small 6-character display that will be a total of 240 flaps (40-flap build) or 312 flaps (52-flap build) that need to be cut and have letters applied to them if you take the full DIY approach.
 
 Because there are so many flaps required for larger displays, I've also had custom flaps (both blank and pre-printed) manufactured that I sell in the [Bezek Labs Etsy store](https://bezeklabs.etsy.com/), which can save a lot of time and helps support continued development of this project.
 
@@ -17,7 +17,7 @@ Because there are so many flaps required for larger displays, I've also had cust
 
 If you'd like to save the most time, I sell [packs of profesionally cut and printed flaps](https://www.etsy.com/listing/1685633114), ready to install into your split-flap display. THese are designed for v2 displays.
 
-This is definitely the priciest option since they're completely custom for this project (a single pack requires 52 different printed designs!), but they look great and will hold up well to long-term use.
+This is definitely the priciest option since they're completely custom for this project (the pre-printed Epilogue set requires 52 different printed designs), but they look great and will hold up well to long-term use.
 
 Available in <a href="https://www.etsy.com/listing/1685633114">1-packs, 6-packs, and 24-packs in the Bezek Labs Etsy store</a>.
 

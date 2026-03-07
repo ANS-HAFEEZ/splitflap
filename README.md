@@ -37,9 +37,10 @@ As of 2025-01-19, the v2 refresh of the mechanical and sensor design is consider
 
 **Here's what's new in v2:**
 
-- **52 flaps per module** for more character/symbol options
+- **40 flaps per module is the default configuration in this repository**
+- **52-flap v2 modules remain supported** if you want additional symbols/color blocks
 - **New printed flap design ("Epilogue")** with 52 flaps per set (see animation above), including several color-block flaps
-- **Updated enclosure** and mechanical parts (laser-cut) to accomodate 52 flaps
+- **Updated enclosure** and mechanical parts (laser-cut) to accomodate both 40- and 52-flap variants
   - Motor wires now exit downward for less awkward wiring!
 - **New sensor PCB** that's easier to assemble and includes an LED for checking the magnet status
 - **Software-configurable calibration** rather than mechanical sensor adjustment
@@ -47,7 +48,7 @@ As of 2025-01-19, the v2 refresh of the mechanical and sensor design is consider
 **But many things are staying the same for easy upgrades/compatibility:**
 - No change to flap dimensions!
 - No changes to Chainlink Driver, Chainlink Buddy boards, or system architecture!
-- 40-flap modules are still an officially supported option!
+- 52-flap modules are still an officially supported option!
 - Open source, as always!
 - v0 parts (sensor kits) will continue to be stocked at Bezek Labs through mid-2025; don't worry if you haven't finished your build yet, the old sensor kits aren't going away for a little while!
 
@@ -94,9 +95,9 @@ The mechanical/structural components are made from laser-cut 3mm MDF or acrylic,
 
 You can view an interactive 3d model of the design [here](https://scottbez1.github.io/splitflap/embed.html?branch=master).
 
-The v2 mechanical design officially supports variants with 52 flaps (perfect for use with the new ["Epilogue" printed flaps](https://bezeklabs.etsy.com/listing/1685633114/)) and 40 flaps. But you can always modify the design to customize it further.
+The v2 mechanical design officially supports both 40- and 52-flap variants (52 is perfect for use with the new ["Epilogue" printed flaps](https://bezeklabs.etsy.com/listing/1685633114/)). Repository defaults are configured for 40 flaps, but you can always override this.
 
-### v2 (52-flap module option - recommended)
+### v2 (52-flap module option)
 ![2d laser cut rendering](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_raster-52.png)
 
 Instructions: [v2 assembly guide](/docs/v2/Assembly.md)
@@ -112,7 +113,7 @@ Latest auto-generated (untested!) artifacts<sup>:warning:</sup>:
 
 <sup>:warning:</sup>For tested/stable/recommended artifacts, always use the [latest release](https://github.com/scottbez1/splitflap/releases) instead, as the links on this page will change over time.
 
-### v2 (40-flap module option)
+### v2 (40-flap module option - default)
 ![2d laser cut rendering](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_raster-40.png)
 
 Instructions: [v2 assembly guide](/docs/v2/Assembly.md)
@@ -122,7 +123,7 @@ Module dimensions: <img height="18" src="https://s3.amazonaws.com/splitflap-arti
 Latest auto-generated (untested!) artifacts<sup>:warning:</sup>:
 * For Ponoko 3mm MDF ([svg](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40-ponoko-3mm-mdf_1x.svg)) <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40-ponoko-3mm-mdf_1x_dimensions.svg" />
 * For Ponoko 3mm acrylic ([svg](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40-ponoko-3mm-acrylic_1x.svg)) <img height="18" src="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40-ponoko-3mm-acrylic_1x_dimensions.svg" />
-* For generic material (0.18mm kerf correction) ([svg](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-52.svg))
+* For generic material (0.18mm kerf correction) ([svg](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40.svg))
 * For Elecrow 3mm Wood ([zipped pdf](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40-elecrow-3mm-wood_1x.zip))
 * For Elecrow 3mm Acrylic ([zipped pdf](https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_laser_vector-40-elecrow-3mm-acrylic_1x.zip))
 
@@ -140,14 +141,14 @@ There are a lot of options; see the `--help` for explanations.
 
 #### Example 1 - Laser cut 6x1
 
-<a href="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel-52-elecrow-3mm-acrylic-6x1.svg">
-<img width="640" src="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel_raster-52-elecrow-3mm-acrylic-6x1.png"/>
+<a href="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel-40-elecrow-3mm-acrylic-6x1.svg">
+<img width="640" src="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel_raster-40-elecrow-3mm-acrylic-6x1.png"/>
 </a>
 
 ```
 python3 3d/scripts/generate_combined_front_panel.py \
   --kerf-preset elecrow-3mm-acrylic \
-  --num-flaps 52 \
+  --num-flaps 40 \
   --cols 6 \
   --rows 1 \
   --spacing-x 0 \
@@ -158,8 +159,8 @@ python3 3d/scripts/generate_combined_front_panel.py \
 ```
 
 #### Example 2 - CNC router 12x2, with frame margin
-<a href="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel-52-3.175-20x4margin-12x2.svg">
-<img width="640" src="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel_raster-52-3.175-20x4margin-12x2.png"/>
+<a href="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel-40-3.175-20x4margin-12x2.svg">
+<img width="640" src="https://s3.amazonaws.com/splitflap-artifacts/master/3d/3d_front_panel_raster-40-3.175-20x4margin-12x2.png"/>
 </a>
 
 For CNC cutting, the script supports rendering a vector file optimized for thicker material (e.g. 6mm MDF) where only the bolt-holes will be through-cut. In this mode, the slots for the top/bottom enclosure pieces can be cut as ~4mm pockets so they aren't visible from the front face. The script automatically generates dog-bone shapes for these pocket cuts.
@@ -169,7 +170,7 @@ This example also demonstrates use of the --frame-margin-x and --frame-margin-y 
 ```
 python3 3d/scripts/generate_combined_front_panel.py \
   --tool-diameter 3.175 \
-  --num-flaps 52 \
+  --num-flaps 40 \
   --cols 12 \
   --rows 2 \
   --spacing-x 0 \
