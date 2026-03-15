@@ -132,10 +132,10 @@
         "min_silk_clearance": 0.0,
         "min_text_height": 0.8,
         "min_text_thickness": 0.08,
-        "min_through_hole_diameter": 0.2,
-        "min_track_width": 0.127,
+        "min_through_hole_diameter": 0.3,
+        "min_track_width": 0.2,
         "min_via_annular_width": 0.1,
-        "min_via_diameter": 0.45,
+        "min_via_diameter": 0.4,
         "solder_mask_to_copper_clearance": 0.0,
         "use_height_for_length_calcs": true
       },
@@ -185,10 +185,8 @@
       ],
       "track_widths": [
         0.0,
-        0.15,
-        0.35,
-        0.55,
-        2.0
+        0.25,
+        0.5
       ],
       "tuning_pattern_settings": {
         "diff_pair_defaults": {
@@ -460,29 +458,11 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "chainlinkDriver.kicad_pro",
+    "filename": "chainlinkBuddyTDisplay.kicad_pro",
     "version": 3
   },
   "net_settings": {
     "classes": [
-      {
-        "bus_width": 12,
-        "clearance": 0.15,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Default",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "priority": -1,
-        "schematic_color": "rgba(0, 0, 0, 0.000)",
-        "track_width": 0.2,
-        "via_diameter": 0.5,
-        "via_drill": 0.3,
-        "wire_width": 6
-      },
       {
         "bus_width": 12,
         "clearance": 0.2,
@@ -492,7 +472,7 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
-        "name": "save",
+        "name": "Default",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": -1,
         "schematic_color": "rgba(0, 0, 0, 0.000)",
@@ -510,191 +490,31 @@
     "netclass_patterns": [
       {
         "netclass": "Default",
-        "pattern": "/CLOCK_IN"
+        "pattern": "+12V"
       },
       {
         "netclass": "Default",
-        "pattern": "/CLOCK_OUT"
+        "pattern": "+3V3"
       },
       {
         "netclass": "Default",
-        "pattern": "/LATCH_IN"
+        "pattern": "+5V"
       },
       {
         "netclass": "Default",
-        "pattern": "/LATCH_OUT"
+        "pattern": "/CLOCK"
       },
       {
         "netclass": "Default",
-        "pattern": "/LED_A"
+        "pattern": "/LATCH"
       },
       {
         "netclass": "Default",
-        "pattern": "/LED_B"
+        "pattern": "/MOTOR_DATA"
       },
       {
         "netclass": "Default",
-        "pattern": "/LED_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LED_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LED_E"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LED_F"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LOOPBACK_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LOOPBACK_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_A_PHASE_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_A_PHASE_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_A_PHASE_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_A_PHASE_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_B_PHASE_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_B_PHASE_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_B_PHASE_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_B_PHASE_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_C_PHASE_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_C_PHASE_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_C_PHASE_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_C_PHASE_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_D_PHASE_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_D_PHASE_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_D_PHASE_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_D_PHASE_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_E_PHASE_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_E_PHASE_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_E_PHASE_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_E_PHASE_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_F_PHASE_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_F_PHASE_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_F_PHASE_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_F_PHASE_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_IN"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_OUT"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/MOTOR_OUT_PRE_BUFFER"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_A"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_C"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_D"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_E"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_F"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_IN"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SENSOR_OUT"
+        "pattern": "/SENSOR_DATA"
       },
       {
         "netclass": "Default",
@@ -702,187 +522,55 @@
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(D1-Pad2)"
+        "pattern": "Net-(U1-Pad15)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(D2-Pad2)"
+        "pattern": "Net-(U1-Pad16)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(D3-Pad2)"
+        "pattern": "Net-(U1-Pad21)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(D4-Pad2)"
+        "pattern": "Net-(U1-Pad22)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(D5-Pad2)"
+        "pattern": "Net-(U1-Pad23)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(D6-Pad2)"
+        "pattern": "Net-(U1-Pad24)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(H1-Pad1)"
+        "pattern": "Net-(U1-Pad3)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(H2-Pad1)"
+        "pattern": "Net-(U1-Pad4)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(H3-Pad1)"
+        "pattern": "Net-(U1-Pad5)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(H4-Pad1)"
+        "pattern": "Net-(U1-Pad6)"
       },
       {
         "netclass": "Default",
-        "pattern": "Net-(H5-Pad1)"
+        "pattern": "Net-(U1-Pad7)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "Net-(U1-Pad8)"
       },
       {
         "netclass": "Default",
         "pattern": "Net-(U1-Pad9)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U10-Pad10)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U2-Pad10)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U3-Pad8)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U4-Pad7)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U5-Pad9)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U6-Pad10)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U7-Pad14)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net-(U8-Pad10)"
-      },
-      {
-        "netclass": "save",
-        "pattern": "+12V"
-      },
-      {
-        "netclass": "save",
-        "pattern": "+3V3"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_A_PHASE_A"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_A_PHASE_B"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_A_PHASE_C"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_A_PHASE_D"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_B_PHASE_A"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_B_PHASE_B"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_B_PHASE_C"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_B_PHASE_D"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_C_PHASE_A"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_C_PHASE_B"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_C_PHASE_C"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_C_PHASE_D"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_D_PHASE_A"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_D_PHASE_B"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_D_PHASE_C"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_D_PHASE_D"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_E_PHASE_A"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_E_PHASE_B"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_E_PHASE_C"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_E_PHASE_D"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_F_PHASE_A"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_F_PHASE_B"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_F_PHASE_C"
-      },
-      {
-        "netclass": "save",
-        "pattern": "/OUT_F_PHASE_D"
       }
     ]
   },
@@ -964,54 +652,12 @@
           "label": "Datasheet",
           "name": "Datasheet",
           "show": true
-        },
-        {
-          "group_by": false,
-          "label": "LCSC",
-          "name": "LCSC",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "LCSC_ALT_LED",
-          "name": "LCSC_ALT_LED",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "LCSC_ALT_SCREW_DIBO",
-          "name": "LCSC_ALT_SCREW_DIBO",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "LCSC_ALT_ULN2003A",
-          "name": "LCSC_ALT_ULN2003A",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "JLCPCB_CORRECTION",
-          "name": "JLCPCB_CORRECTION",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "Description",
-          "name": "Description",
-          "show": false
-        },
-        {
-          "group_by": false,
-          "label": "#",
-          "name": "${ITEM_NUMBER}",
-          "show": false
         }
       ],
       "filter_string": "",
       "group_symbols": true,
       "include_excluded_from_bom": true,
-      "name": "",
+      "name": "Default Editing",
       "sort_asc": true,
       "sort_field": "Reference"
     },
@@ -1042,11 +688,10 @@
     "meta": {
       "version": 1
     },
-    "net_format_name": "Pcbnew",
+    "net_format_name": "",
     "page_layout_descr_file": "",
-    "plot_directory": "./",
+    "plot_directory": "",
     "space_save_all_events": true,
-    "spice_adjust_passive_values": false,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
@@ -1058,7 +703,7 @@
   },
   "sheets": [
     [
-      "eebfa73c-8015-415a-9d7b-0fdf0ae52b38",
+      "18e69150-85a7-46a5-9daf-162535eb3a75",
       "Root"
     ]
   ],
