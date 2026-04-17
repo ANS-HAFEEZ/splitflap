@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(~/.platformio/penv/Scripts/pio run:*)",
+      "Bash(~/.platformio/penv/Scripts/pio device:*)",
+      "Bash(timeout 15 ~/.platformio/penv/Scripts/python -c \":*)",
+      "Bash(~/.platformio/penv/Scripts/python -c \"\nimport serial, time, sys\nsys.stdout.reconfigure\\(encoding='utf-8', errors='replace'\\)\nser = serial.Serial\\('COM3', 230400, timeout=1\\)\nser.dtr = False\nser.rts = False\ntime.sleep\\(0.1\\)\nser.rts = True\ntime.sleep\\(0.1\\)\nser.rts = False\ntime.sleep\\(0.5\\)\nstart = time.time\\(\\)\nwhile time.time\\(\\) - start < 15:\n    data = ser.read\\(ser.in_waiting or 1\\)\n    if data:\n        try:\n            text = data.decode\\('utf-8', errors='replace'\\)\n            for line in text.splitlines\\(keepends=True\\):\n                if any\\(c.isprintable\\(\\) or c in '\\\\r\\\\n' for c in line\\):\n                    print\\(line, end='', flush=True\\)\n        except:\n            pass\nser.close\\(\\)\n\" 2>&1)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(findstr 1883)",
+      "Bash(~/.platformio/penv/Scripts/python -c \"import serial.tools.list_ports; [print\\(f'{p.device}: {p.description}'\\) for p in serial.tools.list_ports.comports\\(\\)]\" 2>&1)"
+    ]
+  }
+}

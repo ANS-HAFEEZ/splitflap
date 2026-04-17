@@ -28,6 +28,7 @@ using namespace json11;
 #define MQTT_COMMAND_TOPIC "home/" DEVICE_INSTANCE_NAME "/command"
 #define MQTT_STATE_TOPIC "home/" DEVICE_INSTANCE_NAME "/state"
 #define MQTT_AVAILABILITY_TOPIC "home/" DEVICE_INSTANCE_NAME "/availability"
+#define MQTT_CALIBRATE_TOPIC "home/" DEVICE_INSTANCE_NAME "/calibrate"
 
 MQTTTask::MQTTTask(SplitflapTask& splitflap_task, DisplayTask& display_task, Logger& logger, const uint8_t task_core) :
         Task("MQTT", 8192, 1, task_core),
@@ -67,8 +68,47 @@ void MQTTTask::mqttCallback(char *topic, byte *payload, unsigned int length) {
     snprintf(buf, sizeof(buf), "Received mqtt callback for topic %s, length %u", topic, length);
     logger_.log(buf);
 
+    if (strcmp(topic, MQTT_CALIBRATE_TOPIC) == 0) {
+        // Calibration commands: "home", "save", "offset_tenth:N", "offset_half:N", "set_offset:N"
+        char cmd[64];
+        uint8_t cmd_len = length < sizeof(cmd) - 1 ? length : sizeof(cmd) - 1;
+        memcpy(cmd, payload, cmd_len);
+        cmd[cmd_len] = 0;
 
-    splitflap_task_.showString((const char *)payload, length, false, true);
+        if (strcmp(cmd, "home") == 0) {
+            logger_.log("MQTT: Recalibrating all modules");
+            splitflap_task_.resetAll();
+        } else if (strcmp(cmd, "save") == 0) {
+            logger_.log("MQTT: Saving calibration offsets");
+            splitflap_task_.saveAllOffsets();
+        } else if (strncmp(cmd, "offset_tenth:", 13) == 0) {
+            uint8_t module_id = atoi(cmd + 13);
+            if (module_id < NUM_MODULES) {
+                snprintf(buf, sizeof(buf), "MQTT: Offset +1/10 for module %u", module_id);
+                logger_.log(buf);
+                splitflap_task_.increaseOffsetTenth(module_id);
+            }
+        } else if (strncmp(cmd, "offset_half:", 12) == 0) {
+            uint8_t module_id = atoi(cmd + 12);
+            if (module_id < NUM_MODULES) {
+                snprintf(buf, sizeof(buf), "MQTT: Offset +1/2 for module %u", module_id);
+                logger_.log(buf);
+                splitflap_task_.increaseOffsetHalf(module_id);
+            }
+        } else if (strncmp(cmd, "set_offset:", 11) == 0) {
+            uint8_t module_id = atoi(cmd + 11);
+            if (module_id < NUM_MODULES) {
+                snprintf(buf, sizeof(buf), "MQTT: Set offset for module %u", module_id);
+                logger_.log(buf);
+                splitflap_task_.setOffset(module_id);
+            }
+        } else {
+            snprintf(buf, sizeof(buf), "MQTT: Unknown calibrate command: %s", cmd);
+            logger_.log(buf);
+        }
+    } else {
+        splitflap_task_.showString((const char *)payload, length, false, true);
+    }
 }
 
 void MQTTTask::connectMQTT() {
@@ -81,6 +121,7 @@ void MQTTTask::connectMQTT() {
     if (mqtt_client_.connect(DEVICE_INSTANCE_NAME, MQTT_USER, MQTT_PASSWORD, MQTT_AVAILABILITY_TOPIC, 1, true, "offline")) {
         logger_.log("MQTT connected");
         mqtt_client_.subscribe(MQTT_COMMAND_TOPIC);
+        mqtt_client_.subscribe(MQTT_CALIBRATE_TOPIC);
 
         // TODO: I believe it's possible to do more complex config to register as a device with multiple
         // entities; it'd be great to explore additional entities like a display backlight control,

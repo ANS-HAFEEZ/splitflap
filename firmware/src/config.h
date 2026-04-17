@@ -42,16 +42,22 @@
 //   - w = white
 //   - y = yellow
 
-// Flap option 1: Legacy printed flaps (40 per module) [default]
+// Custom flap set: 40 flaps, digits 0-9 counter with remaining blank
 #define NUM_FLAPS (40)
+
+// const uint8_t flaps[NUM_FLAPS] = {
+//   ' ', '0', '1', '2', '3', '4', '5', '6', '7', '8',
+//   '9', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+//   ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+//   ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',
+// };
+
+
 const uint8_t flaps[NUM_FLAPS] = {
-  ' ',
-  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-  'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-  '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-  '.',
-  ',',
-  '\'',
+  '0', ' ', ' ', ' ', '4', ' ', ' ', ' ', '8', ' ',
+  ' ', '1', ' ', ' ', ' ', '5', ' ', ' ', ' ', '9',
+  ' ', ' ', '2', ' ', ' ', ' ', '6', ' ', ' ', ' ',
+  ' ', ' ', ' ', '3', ' ', ' ', ' ', '7', ' ', ' ',
 };
 
 // Flap option 2: v2 flaps (52 per module)
@@ -167,10 +173,7 @@ const uint8_t flaps[NUM_FLAPS] = {
 #error NUM_MODULES must be at least 1
 #endif
 #ifdef CHAINLINK
-#if NUM_MODULES % 6 != 0
-#error NUM_MODULES must be a multiple of 6, to match the capacity of the connected Chainlink Drivers. You can use fewer than this number of modules, but the setting must match the Chainlink Driver outputs.
-#endif
-
-#define NUM_LOOPBACKS (NUM_MODULES / 3)
-#define CHAINLINK_ENFORCE_LOOPBACKS 1
+#define NUM_DRIVERS ((NUM_MODULES + 5) / 6)
+#define NUM_LOOPBACKS (NUM_DRIVERS * 2)
+#define CHAINLINK_ENFORCE_LOOPBACKS 0
 #endif
