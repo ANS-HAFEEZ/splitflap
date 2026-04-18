@@ -104,7 +104,8 @@ def main():
     print("  press '+' to nudge it forward (1/10th flap).")
     print()
     print("  Commands:")
-    print("    +   = Nudge offset +1/10th flap (fine)")
+    print("    +   = Nudge offset +1/10th flap (fine forward)")
+    print("    -   = Nudge offset -1/10th flap (fine backward)")
     print("    h   = Nudge offset +1/2 revolution (coarse)")
     print("    n   = Next module (this one is OK)")
     print("    t   = Send test '12345' to verify all")
@@ -128,6 +129,15 @@ def main():
         if cmd == '+':
             print(f"    Nudging module {current_module} offset +1/10th flap...")
             client.publish(CALIBRATE_TOPIC, f"offset_tenth:{current_module}", qos=1)
+            time.sleep(2)
+
+        elif cmd == '-':
+            print(f"    Nudging module {current_module} offset -1/10th flap...")
+            client.publish(CALIBRATE_TOPIC, f"offset_tenth_back:{current_module}", qos=1)
+            time.sleep(1)
+            # Re-send display command only for this module so it moves forward to the new offset position
+            test_str = ' ' * current_module + '0' + ' ' * (NUM_MODULES - current_module - 1)
+            client.publish(COMMAND_TOPIC, test_str, qos=1)
             time.sleep(2)
 
         elif cmd == 'h':

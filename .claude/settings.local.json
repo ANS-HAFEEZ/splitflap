@@ -10,7 +10,17 @@
       "Bash(findstr 1883)",
       "Bash(~/.platformio/penv/Scripts/python -c \"import serial.tools.list_ports; [print\\(f'{p.device}: {p.description}'\\) for p in serial.tools.list_ports.comports\\(\\)]\" 2>&1)",
       "Bash(find /d/work/split_flap/splitflap/firmware/esp32 -type f \\\\\\(-name *.md -o -name README* \\\\\\))",
-      "Bash(~/.platformio/penv/Scripts/platformio.exe run:*)"
+      "Bash(~/.platformio/penv/Scripts/platformio.exe run:*)",
+      "Bash(find D:worksplit_flapsplitflap -maxdepth 2 -type f \\\\\\(-name *.sh -o -name *flash* -o -name *build* \\\\\\))",
+      "Bash(xargs ls:*)",
+      "Bash(find D:worksplit_flapsplitflapdocs -type f -name *.md)",
+      "Bash(pio run:*)",
+      "Bash(where pio:*)",
+      "Bash(where platformio:*)",
+      "Bash(pip show:*)",
+      "Read(//d/work/split_flap/splitflap/$HOME/.platformio/penv/**)",
+      "Read(//c/Users/Ans Hafeez/.platformio/penv/Scripts/**)",
+      "Bash(\"C:/Users/Ans Hafeez/.platformio/penv/Scripts/pio.exe\" run -e chainlink --target upload -d \"D:/work/split_flap/splitflap\" 2>&1)"
     ]
   }
 }

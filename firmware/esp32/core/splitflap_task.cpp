@@ -156,6 +156,9 @@ void SplitflapTask::processQueue() {
                         case QCMD_INCR_OFFSET_TENTH:
                             modules[i]->IncreaseOffset(1);
                             break;
+                        case QCMD_DECR_OFFSET_TENTH:
+                            modules[i]->DecreaseOffset(1);
+                            break;
                         case QCMD_INCR_OFFSET_HALF:
                             modules[i]->IncreaseOffset(5);
                             break;
@@ -430,6 +433,13 @@ void SplitflapTask::increaseOffsetTenth(const uint8_t id) {
     Command command = {};
     command.command_type = CommandType::MODULES;
     command.data.module_command[id] = QCMD_INCR_OFFSET_TENTH;
+    assert(xQueueSendToBack(queue_, &command, portMAX_DELAY) == pdTRUE);
+}
+
+void SplitflapTask::decreaseOffsetTenth(const uint8_t id) {
+    Command command = {};
+    command.command_type = CommandType::MODULES;
+    command.data.module_command[id] = QCMD_DECR_OFFSET_TENTH;
     assert(xQueueSendToBack(queue_, &command, portMAX_DELAY) == pdTRUE);
 }
 

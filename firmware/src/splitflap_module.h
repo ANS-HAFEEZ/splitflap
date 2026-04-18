@@ -123,6 +123,7 @@ class SplitflapModule {
   void Disable();
 
   void IncreaseOffset(uint8_t flap_tenths);
+  void DecreaseOffset(uint8_t flap_tenths);
   void SetOffset();
   uint16_t GetOffset();
   void RestoreOffset(uint16_t offset);
@@ -439,6 +440,19 @@ void SplitflapModule::IncreaseOffset(uint8_t flap_tenths) {
     offset_steps += flap_tenths * STEPS_PER_REVOLUTION / NUM_FLAPS / 10;
     offset_steps %= STEPS_PER_REVOLUTION;
     GoToTargetFlapIndex();
+}
+
+void SplitflapModule::DecreaseOffset(uint8_t flap_tenths) {
+    uint16_t decrement = flap_tenths * STEPS_PER_REVOLUTION / NUM_FLAPS / 10;
+    if (offset_steps >= decrement) {
+        offset_steps -= decrement;
+    } else {
+        offset_steps = STEPS_PER_REVOLUTION - (decrement - offset_steps);
+    }
+    offset_steps %= STEPS_PER_REVOLUTION;
+    // Don't call GoToTargetFlapIndex() here — the motor can only spin forward,
+    // so moving to a lower offset would cause reverse rotation. The caller
+    // should re-send the display command to move forward to the new position.
 }
 
 void SplitflapModule::SetOffset() {

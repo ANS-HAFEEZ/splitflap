@@ -65,7 +65,7 @@ void MQTTTask::mqttCallback(char *topic, byte *payload, unsigned int length) {
     logger_.log(buf);
 
     if (strcmp(topic, MQTT_CALIBRATE_TOPIC) == 0) {
-        // Calibration commands: "home", "save", "offset_tenth:N", "offset_half:N", "set_offset:N"
+        // Calibration commands: "home", "save", "offset_tenth:N", "offset_tenth_back:N", "offset_half:N", "set_offset:N"
         char cmd[64];
         uint8_t cmd_len = length < sizeof(cmd) - 1 ? length : sizeof(cmd) - 1;
         memcpy(cmd, payload, cmd_len);
@@ -83,6 +83,13 @@ void MQTTTask::mqttCallback(char *topic, byte *payload, unsigned int length) {
                 snprintf(buf, sizeof(buf), "MQTT: Offset +1/10 for module %u", module_id);
                 logger_.log(buf);
                 splitflap_task_.increaseOffsetTenth(module_id);
+            }
+        } else if (strncmp(cmd, "offset_tenth_back:", 18) == 0) {
+            uint8_t module_id = atoi(cmd + 18);
+            if (module_id < NUM_MODULES) {
+                snprintf(buf, sizeof(buf), "MQTT: Offset -1/10 for module %u", module_id);
+                logger_.log(buf);
+                splitflap_task_.decreaseOffsetTenth(module_id);
             }
         } else if (strncmp(cmd, "offset_half:", 12) == 0) {
             uint8_t module_id = atoi(cmd + 12);
