@@ -42,25 +42,21 @@ MQTTTask::MQTTTask(SplitflapTask& splitflap_task, DisplayTask& display_task, Log
 }
 
 void MQTTTask::connectWifi() {
-    WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-    // Disable WiFi sleep as it causes glitches on pin 39; see https://github.com/espressif/arduino-esp32/issues/4903#issuecomment-793187707
-    WiFi.setSleep(WIFI_PS_NONE);
-
     char buf[256];
 
-    snprintf(buf, sizeof(buf), "Wifi connecting to %s", WIFI_SSID);
-    display_task_.setMessage(0, String(buf));
+    display_task_.setMessage(0, "WiFi: checking saved creds...");
 
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(1000);
-        logger_.log("Establishing connection to WiFi..");
+    if (wifi_manager_.begin(15000)) {
+        // Connected using saved credentials from flash
+        snprintf(buf, sizeof(buf), "Connected to %s", wifi_manager_.getSSID().c_str());
+        logger_.log(buf);
+        snprintf(buf, sizeof(buf), "Wifi IP: %s", WiFi.localIP().toString().c_str());
+        display_task_.setMessage(0, String(buf));
+    } else {
+        // AP mode was started and user saved new credentials (device will reboot)
+        // This code is normally unreachable since handleSave() calls ESP.restart()
+        display_task_.setMessage(0, "WiFi AP mode - configure via 192.168.4.1");
     }
-
-    snprintf(buf, sizeof(buf), "Connected to network %s", WIFI_SSID);
-    logger_.log(buf);
-
-    snprintf(buf, sizeof(buf), "Wifi IP: %s", WiFi.localIP().toString().c_str());
-    display_task_.setMessage(0, String(buf));
 }
 
 void MQTTTask::mqttCallback(char *topic, byte *payload, unsigned int length) {
@@ -212,7 +208,7 @@ void MQTTTask::run() {
                 snprintf(buf, sizeof(buf), "Wifi IP: %s", WiFi.localIP().toString().c_str());
                 display_task_.setMessage(0, String(buf));
             } else {
-                snprintf(buf, sizeof(buf), "Wifi connecting to %s", WIFI_SSID);
+                snprintf(buf, sizeof(buf), "Wifi connecting to %s", wifi_manager_.getSSID().c_str());
                 display_task_.setMessage(0, String(buf));
             }
             wifi_last_status = wifi_new_status;

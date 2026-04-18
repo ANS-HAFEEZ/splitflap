@@ -8,7 +8,9 @@
       "Bash(python:*)",
       "Bash(pip install:*)",
       "Bash(findstr 1883)",
-      "Bash(~/.platformio/penv/Scripts/python -c \"import serial.tools.list_ports; [print\\(f'{p.device}: {p.description}'\\) for p in serial.tools.list_ports.comports\\(\\)]\" 2>&1)"
+      "Bash(~/.platformio/penv/Scripts/python -c \"import serial.tools.list_ports; [print\\(f'{p.device}: {p.description}'\\) for p in serial.tools.list_ports.comports\\(\\)]\" 2>&1)",
+      "Bash(find /d/work/split_flap/splitflap/firmware/esp32 -type f \\\\\\(-name *.md -o -name README* \\\\\\))",
+      "Bash(~/.platformio/penv/Scripts/platformio.exe run:*)"
     ]
   }
 }

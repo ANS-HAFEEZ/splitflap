@@ -26,6 +26,7 @@
 #include "../core/task.h"
 
 #include "display_task.h"
+#include "wifi_manager.h"
 
 class MQTTTask : public Task<MQTTTask> {
     friend class Task<MQTTTask>; // Allow base Task to invoke protected run()
@@ -43,6 +44,7 @@ class MQTTTask : public Task<MQTTTask> {
         WiFiClient wifi_client_;
         PubSubClient mqtt_client_;
         int mqtt_last_connect_time_ = 0;
+        WifiManager wifi_manager_;
 
         void connectWifi();
         void connectMQTT();
