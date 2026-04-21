@@ -20,7 +20,9 @@
       "Bash(pip show:*)",
       "Read(//d/work/split_flap/splitflap/$HOME/.platformio/penv/**)",
       "Read(//c/Users/Ans Hafeez/.platformio/penv/Scripts/**)",
-      "Bash(\"C:/Users/Ans Hafeez/.platformio/penv/Scripts/pio.exe\" run -e chainlink --target upload -d \"D:/work/split_flap/splitflap\" 2>&1)"
+      "Bash(\"C:/Users/Ans Hafeez/.platformio/penv/Scripts/pio.exe\" run -e chainlink --target upload -d \"D:/work/split_flap/splitflap\" 2>&1)",
+      "Bash(grep -r \"window\\\\|opening\\\\|letter_w\\\\|letter_h\" D:worksplit_flapsplitflap3d/*.scad)",
+      "Bash(grep -E \"\\\\.scad$\")"
     ]
   }
 }

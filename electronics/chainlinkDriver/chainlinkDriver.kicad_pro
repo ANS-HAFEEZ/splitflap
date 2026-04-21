@@ -891,7 +891,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "",
+      "plot": "Singleboard/",
       "pos_files": "",
       "specctra_dsn": "",
       "step": "",
