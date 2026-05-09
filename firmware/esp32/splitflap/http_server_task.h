@@ -16,7 +16,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include <PubSubClient.h>
+#include <WebServer.h>
 #include <WiFi.h>
 
 #include <json11.hpp>
@@ -28,11 +28,11 @@
 #include "display_task.h"
 #include "wifi_manager.h"
 
-class MQTTTask : public Task<MQTTTask> {
-    friend class Task<MQTTTask>; // Allow base Task to invoke protected run()
+class HTTPServerTask : public Task<HTTPServerTask> {
+    friend class Task<HTTPServerTask>;
 
     public:
-        MQTTTask(SplitflapTask& splitflapTask, DisplayTask& DisplayTask, Logger& logger, const uint8_t taskCore);
+        HTTPServerTask(SplitflapTask& splitflapTask, DisplayTask& displayTask, Logger& logger, const uint8_t taskCore);
 
     protected:
         void run();
@@ -41,12 +41,21 @@ class MQTTTask : public Task<MQTTTask> {
         SplitflapTask& splitflap_task_;
         DisplayTask& display_task_;
         Logger& logger_;
-        WiFiClient wifi_client_;
-        PubSubClient mqtt_client_;
-        int mqtt_last_connect_time_ = 0;
         WifiManager wifi_manager_;
+        WebServer server_;
 
         void connectWifi();
-        void connectMQTT();
-        void mqttCallback(char *topic, byte *payload, unsigned int length);
+        void setupRoutes();
+
+        void handleRoot();
+        void handleCommand();
+        void handleCalibrate();
+        void handleState();
+        void handleNotFound();
+        void claimDevice();
+        void pollDisplay();
+
+        String mac_no_colons_;
+        uint32_t last_poll_time_ = 0;
+        String last_display_value_;
 };

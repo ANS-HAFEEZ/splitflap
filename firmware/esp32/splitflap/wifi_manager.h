@@ -25,6 +25,9 @@ public:
     // Returns the SSID currently connected to (or saved)
     String getSSID();
 
+    // Returns the saved password
+    String getPassword();
+
 private:
     Preferences prefs_;
     WebServer server_;

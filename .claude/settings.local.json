@@ -22,7 +22,13 @@
       "Read(//c/Users/Ans Hafeez/.platformio/penv/Scripts/**)",
       "Bash(\"C:/Users/Ans Hafeez/.platformio/penv/Scripts/pio.exe\" run -e chainlink --target upload -d \"D:/work/split_flap/splitflap\" 2>&1)",
       "Bash(grep -r \"window\\\\|opening\\\\|letter_w\\\\|letter_h\" D:worksplit_flapsplitflap3d/*.scad)",
-      "Bash(grep -E \"\\\\.scad$\")"
+      "Bash(grep -E \"\\\\.scad$\")",
+      "Bash(xargs grep:*)",
+      "Bash(timeout 15 ~/.platformio/penv/Scripts/platformio.exe device monitor -e chainlink --filter=default -b 230400)",
+      "Bash(timeout 20 ~/.platformio/penv/Scripts/platformio.exe device monitor -e chainlink -b 230400)",
+      "Bash(cp firmware/esp32/splitflap/mqtt_task.h firmware/esp32/splitflap/http_server_task.h)",
+      "Bash(cp firmware/esp32/splitflap/mqtt_task.cpp firmware/esp32/splitflap/http_server_task.cpp)",
+      "Bash(cd:*)"
     ]
   }
 }

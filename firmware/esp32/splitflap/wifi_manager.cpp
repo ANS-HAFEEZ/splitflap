@@ -100,6 +100,10 @@ String WifiManager::getSSID() {
     return saved_ssid_;
 }
 
+String WifiManager::getPassword() {
+    return saved_password_;
+}
+
 bool WifiManager::loadCredentials() {
     prefs_.begin(NVS_NAMESPACE, true); // read-only
     saved_ssid_ = prefs_.getString("ssid", "");

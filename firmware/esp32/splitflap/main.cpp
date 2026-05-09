@@ -41,8 +41,8 @@ BaseSupervisorTask baseSupervisorTask(splitflapTask, serialTask, 0);
 #endif
 
 #if MQTT
-#include "mqtt_task.h"
-MQTTTask mqttTask(splitflapTask, displayTask, serialTask, 0);
+#include "http_server_task.h"
+HTTPServerTask httpServerTask(splitflapTask, displayTask, serialTask, 0);
 #endif
 
 #if HTTP
@@ -73,7 +73,7 @@ void setup() {
   #endif
 
   #if MQTT
-  mqttTask.begin();
+  httpServerTask.begin();
   #endif
 
   #if HTTP
