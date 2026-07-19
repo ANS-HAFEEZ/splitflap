@@ -28,7 +28,28 @@
       "Bash(timeout 20 ~/.platformio/penv/Scripts/platformio.exe device monitor -e chainlink -b 230400)",
       "Bash(cp firmware/esp32/splitflap/mqtt_task.h firmware/esp32/splitflap/http_server_task.h)",
       "Bash(cp firmware/esp32/splitflap/mqtt_task.cpp firmware/esp32/splitflap/http_server_task.cpp)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(python.exe ./generate_fonts.py --mode full-font -t \"0123456789\")",
+      "Bash(\"/c/Program Files/Inkscape/bin/inkscape.exe\" \"D:/work/split_flap/splitflap/3d/build/fonts/component_00001.svg\" --export-type=pdf --export-filename=\"D:/work/split_flap/splitflap/3d/build/fonts/component_00001.pdf\")",
+      "Bash(\"/c/Program Files/Inkscape/bin/inkscape.exe\" combined_black.svg --export-type=png --export-filename=combined_black_preview.png --export-width=1000)",
+      "Bash(python.exe ./generate_fonts.py --mode full-font -t \"0123456789\" --fill)",
+      "Bash(rm -f fonts/*)",
+      "Bash(rmdir fonts *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(python.exe ./generate_fonts.py --mode full-font -t \"0123456789\" --fill --flap-gap 0.5)",
+      "Bash(\"/c/Program Files/Inkscape/bin/inkscape.exe\" combined_black.svg --export-type=pdf --export-filename=combined_black.pdf)",
+      "PowerShell($ip = \"192.168.100.149\"; try { $s = Invoke-RestMethod \"http://$ip/api/state\" -Method Get -TimeoutSec 8; $s | ConvertTo-Json -Depth 5 } catch { \"ERROR: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Test-NetConnection *)",
+      "PowerShell(Out-Null *)",
+      "PowerShell(python http_calibrate_test.py --live)",
+      "PowerShell(pio run *)",
+      "PowerShell(& \"$env:USERPROFILE\\\\.platformio\\\\penv\\\\Scripts\\\\platformio.exe\" run -e chainlink 2>&1 | Select-Object -Last 30)",
+      "PowerShell(python http_calibrate_test.py)",
+      "PowerShell(& \"$env:USERPROFILE\\\\.platformio\\\\penv\\\\Scripts\\\\platformio.exe\" run -e chainlink 2>&1 | Select-Object -Last 8)",
+      "PowerShell(& \"$env:USERPROFILE\\\\.platformio\\\\penv\\\\Scripts\\\\platformio.exe\" run -e chainlink 2>&1 | Select-Object -Last 6)",
+      "PowerShell(python -m py_compile http_display_test.py; if \\($LASTEXITCODE -eq 0\\) { \"compile OK\" } else { \"compile FAILED\" })",
+      "PowerShell(python http_display_test.py)",
+      "PowerShell(python -m py_compile http_display_test.py; if \\($LASTEXITCODE -eq 0\\){\"compile OK\"}else{\"compile FAILED\"})"
     ]
   }
 }

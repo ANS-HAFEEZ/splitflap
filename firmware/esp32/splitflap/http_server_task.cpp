@@ -23,7 +23,7 @@
 
 #define CLAIM_URL "https://sfdigit.markeeterai.com/app/pair?id="
 #define DISPLAY_API_URL "https://sfdigit.markeeterai.com/api/devices/"
-#define POLL_INTERVAL_MS 60000
+#define POLL_INTERVAL_MS 10000
 
 using namespace json11;
 
@@ -74,7 +74,7 @@ void HTTPServerTask::handleRoot() {
         "Current: %s\n\n"
         "Endpoints:\n"
         "  POST /api/command   - body: text to display\n"
-        "  POST /api/calibrate - body: home|save|offset_tenth:N|offset_tenth_back:N|offset_half:N|set_offset:N\n"
+        "  POST /api/calibrate - body: pause|resume|home|save|offset_tenth:N|offset_tenth_back:N|offset_half:N|set_offset:N\n"
         "  GET  /api/state     - returns JSON with current state\n",
         DEVICE_INSTANCE_NAME,
         WiFi.localIP().toString().c_str(),
@@ -122,17 +122,30 @@ void HTTPServerTask::handleCalibrate() {
     snprintf(buf, sizeof(buf), "HTTP calibrate command: %s", cmd);
     logger_.log(buf);
 
-    if (strcmp(cmd, "home") == 0) {
+    if (strcmp(cmd, "pause") == 0) {
+        logger_.log("HTTP: Calibration mode ON (polling paused)");
+        calibrating_ = true;
+    } else if (strcmp(cmd, "resume") == 0) {
+        logger_.log("HTTP: Calibration mode OFF (polling resumed)");
+        calibrating_ = false;
+        last_display_value_ = "";   // force the next poll to refresh the display
+        last_poll_time_ = 0;
+    } else if (strcmp(cmd, "home") == 0) {
         logger_.log("HTTP: Recalibrating all modules");
+        calibrating_ = true;
         splitflap_task_.resetAll();
     } else if (strcmp(cmd, "save") == 0) {
         logger_.log("HTTP: Saving calibration offsets");
         splitflap_task_.saveAllOffsets();
+        calibrating_ = false;       // resume normal operation after saving
+        last_display_value_ = "";
+        last_poll_time_ = 0;
     } else if (strncmp(cmd, "offset_tenth:", 13) == 0) {
         uint8_t module_id = atoi(cmd + 13);
         if (module_id < NUM_MODULES) {
             snprintf(buf, sizeof(buf), "HTTP: Offset +1/10 for module %u", module_id);
             logger_.log(buf);
+            calibrating_ = true;
             splitflap_task_.increaseOffsetTenth(module_id);
         } else {
             server_.send(400, "text/plain", "Invalid module ID");
@@ -143,6 +156,7 @@ void HTTPServerTask::handleCalibrate() {
         if (module_id < NUM_MODULES) {
             snprintf(buf, sizeof(buf), "HTTP: Offset -1/10 for module %u", module_id);
             logger_.log(buf);
+            calibrating_ = true;
             splitflap_task_.decreaseOffsetTenth(module_id);
         } else {
             server_.send(400, "text/plain", "Invalid module ID");
@@ -153,6 +167,7 @@ void HTTPServerTask::handleCalibrate() {
         if (module_id < NUM_MODULES) {
             snprintf(buf, sizeof(buf), "HTTP: Offset +1/2 for module %u", module_id);
             logger_.log(buf);
+            calibrating_ = true;
             splitflap_task_.increaseOffsetHalf(module_id);
         } else {
             server_.send(400, "text/plain", "Invalid module ID");
@@ -163,6 +178,7 @@ void HTTPServerTask::handleCalibrate() {
         if (module_id < NUM_MODULES) {
             snprintf(buf, sizeof(buf), "HTTP: Set offset for module %u", module_id);
             logger_.log(buf);
+            calibrating_ = true;
             splitflap_task_.setOffset(module_id);
         } else {
             server_.send(400, "text/plain", "Invalid module ID");
@@ -180,15 +196,34 @@ void HTTPServerTask::handleCalibrate() {
 
 void HTTPServerTask::handleState() {
     SplitflapState state = splitflap_task_.getState();
+    // "state" is written in physical flap order (left->right), i.e. reversed
+    // from module index order, so it matches what you read on the display.
     char flap_buf[NUM_MODULES + 1];
     bool all_idle = true;
     for (uint8_t i = 0; i < NUM_MODULES; i++) {
-        flap_buf[i] = flaps[state.modules[i].flap_index];
+        flap_buf[NUM_MODULES - 1 - i] = flaps[state.modules[i].flap_index];
         if (state.modules[i].moving) {
             all_idle = false;
         }
     }
     flap_buf[NUM_MODULES] = 0;
+
+    // Per-module diagnostics. state: 0=NORMAL 1=LOOK_FOR_HOME 2=SENSOR_ERROR
+    // 3=PANIC 4=DISABLED. Non-zero missed/unexpected home counts mean the home
+    // sensor is flaky, which is why a saved offset won't hold across re-homing.
+    Json::array module_detail;
+    for (uint8_t i = 0; i < NUM_MODULES; i++) {
+        char ch[2] = { (char)flaps[state.modules[i].flap_index], 0 };
+        module_detail.push_back(Json::object {
+            { "i", (int)i },
+            { "flap", (int)state.modules[i].flap_index },
+            { "char", std::string(ch) },
+            { "state", (int)state.modules[i].state },
+            { "missed_home", (int)state.modules[i].count_missed_home },
+            { "unexpected_home", (int)state.modules[i].count_unexpected_home },
+            { "moving", state.modules[i].moving },
+        });
+    }
 
     Json response = Json::object {
         { "device", DEVICE_INSTANCE_NAME },
@@ -196,6 +231,7 @@ void HTTPServerTask::handleState() {
         { "state", std::string(flap_buf) },
         { "modules", (int)NUM_MODULES },
         { "idle", all_idle },
+        { "module_detail", module_detail },
     };
 
     server_.send(200, "application/json", response.dump().c_str());
@@ -253,13 +289,23 @@ void HTTPServerTask::pollDisplay() {
             logger_.log(buf);
         } else {
             int count = (int)json["count"].number_value();
+            // Human-readable value, exactly as it appears on the flaps (e.g. "00017").
+            char human[NUM_MODULES + 1];
+            snprintf(human, sizeof(human), "%0*d", NUM_MODULES, count);
+
+            // Physical module chain is ordered opposite to the digit string,
+            // so reverse into module order before sending to the display.
             char display_buf[NUM_MODULES + 1];
-            snprintf(display_buf, sizeof(display_buf), "%0*d", NUM_MODULES, count);
+            for (int a = 0; a < NUM_MODULES; a++) {
+                display_buf[a] = human[NUM_MODULES - 1 - a];
+            }
+            display_buf[NUM_MODULES] = 0;
 
             String count_str = String(display_buf);
             if (count_str != last_display_value_) {
                 last_display_value_ = count_str;
-                snprintf(buf, sizeof(buf), "Poll display count: %s", display_buf);
+                // Log the value as shown on the flaps, not the reversed internal order.
+                snprintf(buf, sizeof(buf), "Poll count %d -> flaps '%s'", count, human);
                 logger_.log(buf);
                 splitflap_task_.showString(display_buf, NUM_MODULES, false, false);
             }
@@ -367,7 +413,7 @@ void HTTPServerTask::run() {
             WiFi.begin(wifi_manager_.getSSID().c_str(), wifi_manager_.getPassword().c_str());
         }
 
-        if (wifi_new_status == WL_CONNECTED && (millis() - last_poll_time_) > POLL_INTERVAL_MS) {
+        if (wifi_new_status == WL_CONNECTED && !calibrating_ && (millis() - last_poll_time_) > POLL_INTERVAL_MS) {
             last_poll_time_ = millis();
             pollDisplay();
         }

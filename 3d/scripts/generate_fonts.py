@@ -92,6 +92,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--spacing-x', type=float, help='Horizontal gap between flaps')
     parser.add_argument('--spacing-y', type=float, help='Vertical gap between flaps')
+    parser.add_argument('--flap-gap', type=float, help='Override the gap (mm) between the top and bottom halves of a single character')
 
     parser.add_argument('--no-comp', action='store_true', default=False, help='Don\'t compensate for the gap between top and bottom flaps')
     parser.add_argument('--alignment', action='store_true', help='Render alignment markers for registration when printing onto flaps')
@@ -125,6 +126,8 @@ if __name__ == '__main__':
         extra_variables['spacing_x'] = args.spacing_x
     if args.spacing_y is not None:
         extra_variables['spacing_y'] = args.spacing_y
+    if args.flap_gap is not None:
+        extra_variables['flap_gap'] = args.flap_gap
 
     if args.kerf is not None:
         extra_variables['kerf_width'] = args.kerf

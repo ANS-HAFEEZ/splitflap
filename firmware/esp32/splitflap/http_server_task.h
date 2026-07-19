@@ -58,4 +58,9 @@ class HTTPServerTask : public Task<HTTPServerTask> {
         String mac_no_colons_;
         uint32_t last_poll_time_ = 0;
         String last_display_value_;
+
+        // When true, normal server polling is paused so it doesn't overwrite
+        // the display while calibrating. Set by the "pause" calibrate command
+        // (and any offset/home command); cleared by "resume" or "save".
+        bool calibrating_ = false;
 };
